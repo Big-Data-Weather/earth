@@ -41,7 +41,6 @@ function logger() {
         '":user-agent" :referrer :req[cf-ray] :req[accept-encoding]\\n:request-all\\n\\n:response-all\\n');
 }
 
-var port = process.argv[2];
 var express = require("express");
 var app = express();
 
@@ -50,5 +49,5 @@ app.use(express.compress({filter: compressionFilter}));
 app.use(logger());
 app.use(express.static("public"));
 
-app.listen(port);
-console.log("Listening on port " + port + "...");
+app.listen(80);
+console.log("Listening on port 80");
