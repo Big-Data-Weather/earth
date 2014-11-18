@@ -44,6 +44,7 @@ var products = function() {
     function gfs1p0degPath(attr, type, surface, level) {
         var dir = attr.date, stamp = dir === "current" ? "current" : attr.hour;
         var file = [stamp, type, surface, level, "gfs", "1.0"].filter(µ.isValue).join("-") + ".json";
+        alert(file);
         return [WEATHER_PATH, dir, file].join("/");
     }
 
@@ -195,39 +196,41 @@ var products = function() {
             }
         },
 
-        "relative_humidity": {
-            matches: _.matches({param: "wind", overlayType: "relative_humidity"}),
+        "wind_model": {
+            matches: _.matches({param: "wind", overlayType: "wind_model"}),
             create: function(attr) {
                 return buildProduct({
-                    field: "scalar",
-                    type: "relative_humidity",
+                    field: "vector",
+                    type: "wind_model",
                     description: localize({
-                        name: {en: "Relative Humidity", ja: "相対湿度"},
+                        name: {en: "wind_model", ja: "風速"},
                         qualifier: {en: " @ " + describeSurface(attr), ja: " @ " + describeSurfaceJa(attr)}
                     }),
-                    paths: [gfs1p0degPath(attr, "relative_humidity", attr.surface, attr.level)],
+                    paths: [gfs1p0degPath(attr, "wind_model", attr.surface, attr.level)],
                     date: gfsDate(attr),
                     builder: function(file) {
-                        var vars = file.variables;
-                        var rh = vars.Relative_humidity_isobaric || vars.Relative_humidity_height_above_ground;
-                        var data = rh.data;
+                        var uData = file[0].data, vData = file[1].data;
                         return {
-                            header: netcdfHeader(vars.time, vars.lat, vars.lon, file.Originating_or_generating_Center),
-                            interpolate: bilinearInterpolateScalar,
+                            header: file[0].header,
+                            interpolate: bilinearInterpolateVector,
                             data: function(i) {
-                                return data[i];
+                                return [uData[i], vData[i]];
                             }
-                        };
+                        }
                     },
                     units: [
-                        {label: "%", conversion: function(x) { return x; }, precision: 0}
+                        {label: "km/h", conversion: function(x) { return x * 3.6; },      precision: 0},
+                        {label: "m/s",  conversion: function(x) { return x; },            precision: 1},
+                        {label: "kn",   conversion: function(x) { return x * 1.943844; }, precision: 0},
+                        {label: "mph",  conversion: function(x) { return x * 2.236936; }, precision: 0}
                     ],
                     scale: {
                         bounds: [0, 100],
                         gradient: function(v, a) {
-                            return µ.sinebowColor(Math.min(v, 100) / 100, a);
+                            return µ.extendedSinebowColor(Math.min(v, 100) / 100, a);
                         }
-                    }
+                    },
+                    particles: {velocityScale: 1/60000, maxIntensity: 17}
                 });
             }
         },
