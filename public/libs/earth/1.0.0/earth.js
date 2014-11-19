@@ -902,22 +902,6 @@
             }
         });
 
-        d3.selectAll(".fill-screen").attr("width", view.width).attr("height", view.height);
-        // Adjust size of the scale canvas to fill the width of the menu to the right of the label.
-        var label = d3.select("#scale-label").node();
-        d3.select("#scale")
-            .attr("width", (d3.select("#quotaero").node().offsetWidth - label.offsetWidth) * 0.97)
-            .attr("height", label.offsetHeight / 2);
-
-        d3.select("#quotaero").on("click", function() {
-            if (µ.isEmbeddedInIFrame()) {
-                window.open("http://earth.nullschool.net/" + window.location.hash, "_blank");
-            }
-            else {
-                d3.select("#quotaero-menu").classed("invisible", !d3.select("#quotaero-menu").classed("invisible"));
-            }
-        });
-
         if (µ.isFF()) {
             // Workaround FF performance issue of slow click behavior on map having thick coastlines.
             d3.select("#display").classed("firefox", true);

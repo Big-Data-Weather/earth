@@ -126,7 +126,7 @@ body {
     pointer-events: all;
 }
 
-#null-menu, #quotaero-menu {
+#null-menu {
     background-color: rgba(5, 10, 30, 0.85);
     border-radius: 0.5rem/0.5rem;
     overflow: hidden;
@@ -140,7 +140,7 @@ body {
     -webkit-transition: opacity 250ms ease, max-height 250ms ease, margin-top 250ms ease;
 }
 
-#null-menu.invisible, #quotaero-menu.invisible {
+#null-menu.invisible {
     margin-top: 0;
     padding: 0 1rem 0 1rem;
     opacity: 0;
