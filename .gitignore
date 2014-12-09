@@ -7,8 +7,5 @@ private
 *.iml
 
 dev-server.js
-server.js
-
 json_data.json
 
-server.js
