@@ -1,11 +1,1 @@
-.DS_Store
-.idea
-node_modules
-target
-scratch
-private
-*.iml
-
-dev-server.js
-json_data.json
 
