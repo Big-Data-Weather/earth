@@ -1,0 +1,14 @@
+http://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gdas.20141114/gdas1.t00z.pgrbf00.grib2
+// http for actual data from that date
+
+
+http://nomads.ncep.noaa.gov/cgi-bin/filter_gfs.pl?file=gdas1.t00z.pgrbanl.grib2&lev_10_m_above_ground=on&var_UGRD=on&var_VGRD=on&dir=%2Fgfs.2014111400
+
+//works for model data
+http://nomads.ncep.noaa.gov/cgi-bin/filter_gfs.pl?file=gfs.t00z.pgrbf00.grib2&lev_10_m_above_ground=on&var_UGRD=on&var_VGRD=on&dir=%2Fgfs.2014111400
+
+----------------------------------------------------------------------------------------------------
+
+http://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gdas.20141114/gdas1.t00z.pgrbf00.grib2
+
+http://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gdas.20141114/filter_gfs.pl?file=gdas1.t00z.pgrbf00.grib2&lev_10_m_above_ground=on&var_UGRD=on&var_VGRD=on&dir=%2Fgfs.2014111400
