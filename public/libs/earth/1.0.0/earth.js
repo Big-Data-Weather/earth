@@ -709,21 +709,20 @@
             parts[0] === "current" ? now : null;
     }
 
-    /**
-     * Display the grid's validity date in the menu. Allow toggling between local and UTC time.
-     */
-    // function showDate(grids) {
-    //     var date = new Date(validityDate(grids)), isLocal = d3.select("#data-date").classed("local");
-    //     var formatted = isLocal ? µ.toLocalISO(date) : µ.toUTCISO(date);
-    //     d3.select("#data-date").text(formatted + " " + (isLocal ? "Local" : "UTC"));
-    //     d3.select("#toggle-zone").text("⇄ " + (isLocal ? "UTC" : "Local"));
-    // }
+    // /**
+    //  * Display the grid's validity date in the menu. Allow toggling between local and UTC time.
+    //  */
+    function showDate(grids) {
+        var date = new Date(validityDate(grids)), isLocal = d3.select("#data-date").classed("local");
+        var formatted = isLocal ? µ.toLocalISO(date) : µ.toUTCISO(date);
+        d3.select("#data-date").text(formatted);
+    }
 
     /**
      * Display the grids' types in the menu.
      */
     function showGridDetails(grids) {
-        // showDate(grids);
+        showDate(grids);
         var description = "", center = "";
         if (grids) {
             var langCode = d3.select("body").attr("data-lang") || "en";
