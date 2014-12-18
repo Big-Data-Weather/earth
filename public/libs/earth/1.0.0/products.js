@@ -111,7 +111,7 @@ var products = function() {
     var FACTORIES = {
 
         "wind_actual": {
-            matches: _.matches({param: "wind"}),
+            matches: _.matches({param: "wind", overlayType:"wind_actual"}),
             create: function(attr) {
                 return buildProduct({
                     field: "vector",
@@ -149,52 +149,6 @@ var products = function() {
             }
         },
 
-        "temp": {
-            matches: _.matches({param: "wind", overlayType: "temp"}),
-            create: function(attr) {
-                return buildProduct({
-                    field: "scalar",
-                    type: "temp",
-                    description: localize({
-                        name: {en: "Temp", ja: "気温"},
-                        qualifier: {en: " @ " + describeSurface(attr), ja: " @ " + describeSurfaceJa(attr)}
-                    }),
-                    paths: [gfs1p0degPath(attr, "temp", attr.surface, attr.level)],
-                    date: gfsDate(attr),
-                    builder: function(file) {
-                        var record = file[0], data = record.data;
-                        return {
-                            header: record.header,
-                            interpolate: bilinearInterpolateScalar,
-                            data: function(i) {
-                                return data[i];
-                            }
-                        }
-                    },
-                    units: [
-                        {label: "°C", conversion: function(x) { return x - 273.15; },       precision: 1},
-                        {label: "°F", conversion: function(x) { return x * 9/5 - 459.67; }, precision: 1},
-                        {label: "K",  conversion: function(x) { return x; },                precision: 1}
-                    ],
-                    scale: {
-                        bounds: [193, 328],
-                        gradient: µ.segmentedColorScale([
-                            [193,     [37, 4, 42]],
-                            [206,     [41, 10, 130]],
-                            [219,     [81, 40, 40]],
-                            [233.15,  [192, 37, 149]],  // -40 C/F
-                            [255.372, [70, 215, 215]],  // 0 F
-                            [273.15,  [21, 84, 187]],   // 0 C
-                            [275.15,  [24, 132, 14]],   // just above 0 C
-                            [291,     [247, 251, 59]],
-                            [298,     [235, 167, 21]],
-                            [311,     [230, 71, 39]],
-                            [328,     [88, 27, 67]]
-                        ])
-                    }
-                });
-            }
-        },
 
         "wind_model": {
             matches: _.matches({param: "wind", overlayType: "wind_model"}),
@@ -273,6 +227,54 @@ var products = function() {
                 });
             }
         },
+
+        "temp": {
+            matches: _.matches({param: "wind", overlayType: "wind_difference"}),
+            create: function(attr) {
+                return buildProduct({
+                    field: "scalar",
+                    type: "temp",
+                    description: localize({
+                        name: {en: "Temp", ja: "気温"},
+                        qualifier: {en: " @ " + describeSurface(attr), ja: " @ " + describeSurfaceJa(attr)}
+                    }),
+                    paths: [gfs1p0degPath(attr, "temp", attr.surface, attr.level)],
+                    date: gfsDate(attr),
+                    builder: function(file) {
+                        var record = file[0], data = record.data;
+                        return {
+                            header: record.header,
+                            interpolate: bilinearInterpolateScalar,
+                            data: function(i) {
+                                return data[i];
+                            }
+                        }
+                    },
+                    units: [
+                        {label: "°C", conversion: function(x) { return x - 273.15; },       precision: 1},
+                        {label: "°F", conversion: function(x) { return x * 9/5 - 459.67; }, precision: 1},
+                        {label: "K",  conversion: function(x) { return x; },                precision: 1}
+                    ],
+                    scale: {
+                        bounds: [193, 328],
+                        gradient: µ.segmentedColorScale([
+                            [193,     [37, 4, 42]],
+                            [206,     [41, 10, 130]],
+                            [219,     [81, 40, 40]],
+                            [233.15,  [192, 37, 149]],  // -40 C/F
+                            [255.372, [70, 215, 215]],  // 0 F
+                            [273.15,  [21, 84, 187]],   // 0 C
+                            [275.15,  [24, 132, 14]],   // just above 0 C
+                            [291,     [247, 251, 59]],
+                            [298,     [235, 167, 21]],
+                            [311,     [230, 71, 39]],
+                            [328,     [88, 27, 67]]
+                        ])
+                    }
+                });
+            }
+        },
+
 
         "off": {
             matches: _.matches({overlayType: "off"}),
