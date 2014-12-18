@@ -2,8 +2,8 @@ import json
 from pprint import pprint
 from json import encoder
 
-json_data=open('current-wind_model-surface-level-gfs-1.0.json')
-json_data2=open('current-wind_actual-surface-level-gfs-1.0.json')
+json_data=open('current-wind_actual-surface-level-gfs-1.0.json')
+json_data2=open('current-wind_model-surface-level-gfs-1.0.json')
 datalist = []
 encoder.FLOAT_REPR = lambda o: format(o, '.2f')
 
@@ -22,13 +22,7 @@ for point in range(0,len(data)):
 	# print(data[point], data2[point])
 # pprint(datalist)
 
-with open('current-wind_difference-surface-level-gfs-1.0.json', 'r+') as f:
-    data = json.load(f)
-    
-    for i in data:
-		i['data'] = datalist
-    f.seek(0)        # <--- should reset file position to the beginning.
+with open('current-wind_difference-surface-level-gfs-1.0.json', 'w') as f:
     json.dump(data, f, separators = (',', ':'))
-    json.dump(data,json_data, 'data', separators = (',', ':'))
 
 json_data.close()
