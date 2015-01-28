@@ -113,8 +113,12 @@ body {
     font-size: 2.4rem;
 }
 
-#status, #location, #menu {
+#status, #location,{
     font-size: 1.75rem;
+}
+
+#menu {
+    font-size: auto;
 }
 
 #status, #location, #earth {
@@ -131,7 +135,7 @@ body {
     border-radius: 0.5rem/0.5rem;
     overflow: hidden;
     pointer-events: all;
-
+    height: 50%;
     margin-top: 5px;
     padding: 0.5rem 1rem 0.5rem 1rem;
     padding-top: 0px;
