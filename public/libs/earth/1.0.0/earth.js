@@ -713,9 +713,14 @@
     //  * Display the grid's validity date in the menu. Allow toggling between local and UTC time.
     //  */
     function showDate(grids) {
-        var date = new Date(validityDate(grids)), isLocal = d3.select("#data-date").classed("local");
-        var formatted = isLocal ? µ.toLocalISO(date) : µ.toUTCISO(date);
-        d3.select("#data-date").text(formatted);
+        if(d3.select('#overlay-wind_difference')[0][0].className != "text-button highlighted"){
+            var date = new Date(validityDate(grids)), isLocal = d3.select("#data-date").classed("local");
+            var formatted = isLocal ? µ.toLocalISO(date) : µ.toUTCISO(date);
+            d3.select("#data-date").text(formatted);
+        }
+        else {
+            d3.select("#data-date").text("Difference");
+        }
     }
 
     /**
@@ -898,6 +903,13 @@
             }
             else {
                 d3.select("#null-menu").classed("invisible", !d3.select("#null-menu").classed("invisible"));
+
+                if(d3.select("#null-menu").classed("invisible") != true){
+                    d3.select("#null-school").text("Close Menu");
+                }
+                else{
+                    d3.select("#null-school").text("Menu");
+                }
             }
         });
 

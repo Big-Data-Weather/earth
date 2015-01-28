@@ -39,7 +39,7 @@ a, .text-button {
 }
 
 .text-button.highlighted {
-    color: #e2b42e;
+    color: #FFA500;
 }
 
 .text-button.disabled {
