@@ -253,7 +253,7 @@ body {
  **************************************************************************************************/
 
 #about {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 #about h1 {
@@ -262,6 +262,11 @@ body {
     padding-top: 2rem;
 }
 
+#why h2 {
+    font-size: 2.0rem;
+    text-align: center;
+    padding-top: 2rem;
+}
 #about div {
     clear: both;
 }
@@ -270,7 +275,12 @@ body {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
+#why .blurb {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    line-height: 10px;
 
+}
 #about .blurb img {
     padding-top: 2rem;
 }

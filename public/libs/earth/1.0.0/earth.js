@@ -473,7 +473,9 @@
         var projection = globe.projection;
         var bounds = globe.bounds(view);
         // How fast particles move on the screen (arbitrary value chosen for aesthetics).
-        var velocityScale = bounds.height * primaryGrid.particles.velocityScale;
+        if (configuration.get("overlayType") != "wind_difference"){
+            var velocityScale = bounds.height * primaryGrid.particles.velocityScale;
+        }
 
         var columns = [];
         var point = [];
@@ -667,6 +669,7 @@
             if (overlayType !== "off") {
                 ctx.putImageData(field.overlay, 0, 0);
             }
+
             drawGridPoints(ctx, grid, globeAgent.value());
         }
 
