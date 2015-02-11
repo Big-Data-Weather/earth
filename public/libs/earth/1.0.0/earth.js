@@ -690,7 +690,7 @@
                 var value = µ.spread(pct, bounds[0], bounds[1]);
                 var elementId = grid.type === "wind" ? "#location-wind-units" : "#location-value-units";
                 var units = createUnitToggle(elementId, grid).value();
-                colorBar.attr("title", µ.formatScalar(value, units) + " " + units.label);
+                colorBar.attr("title", units.label);
             });
         }
     }
@@ -782,11 +782,6 @@
      */
     function showOverlayValueAtLocation(value, product) {
         var unitToggle = createUnitToggle("#location-value-units", product), units = unitToggle.value();
-        d3.select("#location-value").text(µ.formatScalar(value, units));
-        d3.select("#location-value-units").text(units.label).on("click", function() {
-            unitToggle.next();
-            showOverlayValueAtLocation(value, product);
-        });
     }
 
     // Stores the point and coordinate of the currently visible location. This is used to update the location

@@ -251,23 +251,22 @@ var products = function() {
                         }
                     },
                     units: [
-                        {label: "°C", conversion: function(x) { return x - 273.15; },       precision: 1},
-                        {label: "°F", conversion: function(x) { return x * 9/5 - 459.67; }, precision: 1},
-                        {label: "K",  conversion: function(x) { return x; },                precision: 1}
+                        //previously help temperature units that we no longer need
                     ],
                     scale: {
                         bounds: [0, 20],
                         gradient: µ.segmentedColorScale([
-                            [1.5,  [15, 67, 215]],  // Regular blue
-                            [2.5,  [38, 87, 191]],   // 0 C
-                            [3,  [61, 108, 168]],   // just above 0 C
-                            [4, [84, 129, 145]],
-                            [5,     [107, 150, 121]],
-                            [7, [130, 170, 98]],
-                            [9,     [153, 192, 75]],
-                            [11, [176, 293, 51]],
-                            [15,     [199, 234, 28]],
-                            [19,     [222, 255, 5]]
+                            // [value of difference, [rgb color]]
+                            [1.5,  [7, 58, 166]],  // Regular blue
+                            [2.5,  [9, 90, 173]],   
+                            [3,  [16, 160, 188]],   
+                            [4, [19, 195, 183]],
+                            [5,     [23, 203, 169]],
+                            [7, [27, 210, 144]],
+                            [9,     [36, 225, 91]],
+                            [11, [40, 232, 64]],
+                            [15,     [94, 247, 50]],
+                            [19,     [135, 255, 56]] //Green
                         ])
                     }
                 });
