@@ -299,20 +299,13 @@ var µ = function() {
     }
 
     /**
-     * Returns a human readable string for the provided scalar in the given units.
-     */
-    function formatScalar(value, units) {
-        return units.conversion(value).toFixed(units.precision);
-    }
-
-    /**
      * Returns a human readable string for the provided rectangular wind vector in the given units.
      * See http://mst.nerc.ac.uk/wind_vect_convs.html.
      */
     function formatVector(wind, units) {
         var d = Math.atan2(-wind[0], -wind[1]) / τ * 360;  // calculate into-the-wind cardinal degrees
         var wd = Math.round((d + 360) % 360 / 5) * 5;  // shift [-180, 180] to [0, 360], and round to nearest 5.
-        return wd.toFixed(0) + "° @ " + formatScalar(wind[2], units);
+        return wd.toFixed(0);
     }
 
     /**
@@ -647,7 +640,6 @@ var µ = function() {
         windIntensityColorScale: windIntensityColorScale,
         segmentedColorScale: segmentedColorScale,
         formatCoordinates: formatCoordinates,
-        formatScalar: formatScalar,
         formatVector: formatVector,
         loadJson: loadJson,
         distortion: distortion,
