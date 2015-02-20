@@ -2,14 +2,8 @@
 <html itemscope itemtype="http://schema.org/Map" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
 <head>
     <meta charset="utf-8"/>
-    <title>earth :: an animated map of global wind and weather</title>
+    <title>Null School - Modified</title>
     <meta itemprop="name"                                      content="earth"/>
-    <meta itemprop="description"     name="description"        content="an adapted animated map of global wind and weather heavily based on nullschool"/>
-    <meta itemprop="author"          name="author"             content="Cameron Beccario"/>
-
-    <meta property="og:type"        content="website"/>
-    <meta property="og:title"       content="earth"/>
-    <meta property="og:description" content="An animated map of global wind and weather. Visit the community at https://www.facebook.com/EarthWindMap"/>
     <meta property="og:url"         content="http://earth.nullschool.net"/>
     <meta property="og:image"       content="http://earth.nullschool.net/preview.jpg"/>
 
@@ -53,21 +47,24 @@
             </p>
         </div>
 
+        <!-- closed menu -->
         <p id="earth">
             <span id="null-school" class="text-button" title="menu">Menu</span>
             <span id="progress" class="invisible"></span>
         </p>
 
+        <!-- open menu -->
         <div id="null-menu" class="invisible">
             <div id="menu" class="invisible">
-                        <p>Date: <span
-                id="data-date" class="local"></span>
-            </p>
+
+                <!-- Date should not be displayed for difference layer -->
+                <p>Date: <span id="data-date" class="local"></span>
+                </p>
+
             <p><span id="scale-label">Scale: </span><canvas id="scale"></canvas></p>
 
             <p class="wind-mode">View: <span
                 <span class="text-button" id="overlay-wind_actual" title="Wind Actual">Wind Model 1</span>  
-<!--                 – <span class="text-button" id="overlay-temp" title="Temperature">Temp</span>  -->
                 – <span class="text-button" id="overlay-wind_model" title="Wind Model">Wind Model 2</span>
                 – <span class="text-button" id="overlay-wind_difference" title="Wind Difference">Wind Difference</span>
             </p>

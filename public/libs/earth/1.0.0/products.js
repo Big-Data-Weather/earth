@@ -10,7 +10,10 @@ var products = function() {
     "use strict";
 
     var WEATHER_PATH = "/data/weather";
+
+    // oscar weather data is currently not being used for this project
     var OSCAR_PATH = "/data/oscar";
+
     var catalogs = {
         // The OSCAR catalog is an array of file names, sorted and prefixed with yyyyMMdd. Last item is the
         // most recent. For example: [ 20140101-abc.json, 20140106-abc.json, 20140112-abc.json, ... ]
@@ -41,6 +44,8 @@ var products = function() {
      * @param {String?} level
      * @returns {String}
      */
+
+     // creates/returns the file path of the data
     function gfs1p0degPath(attr, type, surface, level) {
         var dir = attr.date, stamp = dir === "current" ? "current" : attr.hour;
         var file = [stamp, type, surface, level, "gfs", "1.0"].filter(µ.isValue).join("-") + ".json";
@@ -48,9 +53,9 @@ var products = function() {
         return [WEATHER_PATH, dir, file].join("/");
     }
 
+    // Construct the date from the current time, rounding down to the nearest three-hour block.
     function gfsDate(attr) {
         if (attr.date === "current") {
-            // Construct the date from the current time, rounding down to the nearest three-hour block.
             var now = new Date(Date.now()), hour = Math.floor(now.getUTCHours() / 3);
             return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), hour));
         }
@@ -108,6 +113,7 @@ var products = function() {
         }
     }
 
+    // Layers of the application
     var FACTORIES = {
 
         "wind_actual": {
