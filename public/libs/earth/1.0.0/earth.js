@@ -6,6 +6,9 @@
  *
  * https://github.com/cambecc/earth
  */
+
+ // comments with *Quotaero* are comments the Quotaero team has added
+ // everything else was either not changed, not important, or comments from the original application
 (function() {
     "use strict";
 
@@ -473,6 +476,8 @@
         var projection = globe.projection;
         var bounds = globe.bounds(view);
         // How fast particles move on the screen (arbitrary value chosen for aesthetics).
+        // *Quotaero* if the current layer is the difference layer, give the wind vectors no velocity
+        // so that they do not show up
         if (configuration.get("overlayType") != "wind_difference"){
             var velocityScale = bounds.height * primaryGrid.particles.velocityScale;
         }
@@ -715,6 +720,8 @@
     // /**
     //  * Display the grid's validity date in the menu. Allow toggling between local and UTC time.
     //  */
+
+    // *Quotaero* if we are in the difference layer, do not display the date
     function showDate(grids) {
         if(d3.select('#overlay-wind_difference')[0][0].className != "text-button highlighted"){
             var date = new Date(validityDate(grids)), isLocal = d3.select("#data-date").classed("local");
@@ -902,6 +909,8 @@
             else {
                 d3.select("#null-menu").classed("invisible", !d3.select("#null-menu").classed("invisible"));
 
+                // *Quotaero* if menu is open change text to close menu to make it clear for 'certain' users
+                // how to clise the menu
                 if(d3.select("#null-menu").classed("invisible") != true){
                     d3.select("#null-school").text("Close Menu");
                 }

@@ -6,6 +6,9 @@
  *
  * https://github.com/cambecc/earth
  */
+
+ // comments with *Quotaero* are comments the Quotaero team has added
+ // everything else was either not changed, not important, or comments from the original application
 var products = function() {
     "use strict";
 
@@ -113,9 +116,10 @@ var products = function() {
         }
     }
 
-    // Layers of the application
+    // *Quotaero* Layers of the application
     var FACTORIES = {
 
+        // *Quotaero* Layer for first option in menu 
         "wind_actual": {
             matches: _.matches({param: "wind", overlayType:"wind_actual"}),
             create: function(attr) {
@@ -126,6 +130,8 @@ var products = function() {
                         name: {en: "Wind", ja: "風速"},
                         qualifier: {en: " @ " + describeSurface(attr), ja: " @ " + describeSurfaceJa(attr)}
                     }),
+
+                    // *Quotaero* tells the application to use the wind_actual file
                     paths: [gfs1p0degPath(attr, "wind_actual", attr.surface, attr.level)],
                     date: gfsDate(attr),
                     builder: function(file) {
@@ -155,7 +161,7 @@ var products = function() {
             }
         },
 
-
+        // *Quotaero* Layer for second option in menu 
         "wind_model": {
             matches: _.matches({param: "wind", overlayType: "wind_model"}),
             create: function(attr) {
@@ -166,6 +172,8 @@ var products = function() {
                         name: {en: "wind_model", ja: "風速"},
                         qualifier: {en: " @ " + describeSurface(attr), ja: " @ " + describeSurfaceJa(attr)}
                     }),
+
+                     // *Quotaero* tells the application to use the wind_model file
                     paths: [gfs1p0degPath(attr, "wind_model", attr.surface, attr.level)],
                     date: gfsDate(attr),
                     builder: function(file) {
@@ -195,6 +203,10 @@ var products = function() {
             }
         },
 
+        // *Quotaero* the difference layer requires a wind layer overlay becuase the application can only display scalars
+        // over a vector. In this situation this wind_difference layer is being used as a overlay BUT
+        // it will not be shown
+
         "wind_difference": {
             matches: _.matches({param: "wind", overlayType: "wind_difference"}),
             create: function(attr) {
@@ -205,6 +217,8 @@ var products = function() {
                         name: {en: "wind_difference", ja: "風速"},
                         qualifier: {en: " @ " + describeSurface(attr), ja: " @ " + describeSurfaceJa(attr)}
                     }),
+
+                     // *Quotaero* tells the application to use the wind_difference file
                     paths: [gfs1p0degPath(attr, "wind_difference", attr.surface, attr.level)],
                     date: gfsDate(attr),
                     builder: function(file) {
@@ -234,6 +248,10 @@ var products = function() {
             }
         },
 
+        // *Quotaero* instead of the wind difference layer showing, this layer will be shown
+        // this layer requires a wind overlay to be displayed under it, in this case the wind overlay
+        // we will be displayin over is wind difference
+
         "temp": {
             matches: _.matches({param: "wind", overlayType: "wind_difference"}),
             create: function(attr) {
@@ -244,6 +262,8 @@ var products = function() {
                         name: {en: "Temp", ja: "気温"},
                         qualifier: {en: " @ " + describeSurface(attr), ja: " @ " + describeSurfaceJa(attr)}
                     }),
+
+                     // *Quotaero* tells the application to use the temp file
                     paths: [gfs1p0degPath(attr, "temp", attr.surface, attr.level)],
                     date: gfsDate(attr),
                     builder: function(file) {
@@ -257,12 +277,12 @@ var products = function() {
                         }
                     },
                     units: [
-                        //previously help temperature units that we no longer need
+                        // *Quotaero* previously held temperature units that we no longer need
                     ],
                     scale: {
                         bounds: [0, 20],
                         gradient: µ.segmentedColorScale([
-                            // [value of difference, [rgb color]]
+                            // *Quotaero* [value of difference, [rgb color]]
                             [1.5,  [7, 58, 166]],  // Regular blue
                             [2.5,  [9, 90, 173]],   
                             [3,  [16, 160, 188]],   
