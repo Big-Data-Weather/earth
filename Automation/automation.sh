@@ -23,6 +23,10 @@ java -cp .:json-20090211.jar DifferenceCreator
 
 echo "begin moving files"
 
+rm /srv/www/myappnamehere/current/public/data/weather/current/current-temp-surface-level-gfs-1.0.json
+rm /srv/www/myappnamehere/current/public/data/weather/current/current-wind_actual-surface-level-gfs-1.0.json
+rm /srv/www/myappnamehere/current/public/data/weather/current/current-wind_model-surface-level-gfs-1.0.json
+
 cp -n current-temp-surface-level-gfs-1.0.json /srv/www/myappnamehere/current/public/data/weather/current/
 cp -n current-wind_actual-surface-level-gfs-1.0.json /srv/www/myappnamehere/current/public/data/weather/current/
 cp -n current-wind_model-surface-level-gfs-1.0.json /srv/www/myappnamehere/current/public/data/weather/current/
