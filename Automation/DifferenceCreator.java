@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Sandbox {
+public class DifferenceCreator {
 
 	private static JSONObject jsonFile1ObjU;
 	private static JSONObject jsonFile1ObjV;
@@ -26,11 +27,13 @@ public class Sandbox {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 
 	//this creates the basic files to be used as the model and actual data
-	public static void createBasicJSONFiles() throws IOException
+	public static void createBasicJSONFiles() throws IOException, JSONException
 	{
 		//change filePath location to where you want the files to be stored
 		String filePath1 = "Quotaero Data/current-wind_model-surface-level-gfs-1.0.json";
@@ -70,7 +73,7 @@ public class Sandbox {
 	//creates a scalar file to work as the "difference layer"
 	//we make it into a temperature file since the functionality of that
 	//type of file does not move and shows a noticeable difference
-	public static void createDifferenceScalarJSONFile() throws IOException
+	public static void createDifferenceScalarJSONFile() throws IOException, JSONException
 	{
 		//change the filePath to change where the output file is stored
 		String filePath = "Quotaero Data/current-temp-surface-level-gfs-1.0.json";
@@ -154,7 +157,7 @@ public class Sandbox {
 	//currently this does not work
 	//we couldn't find out why it wouldn't work with the null school code
 	//don't run and replace the current difference file until this works
-	public static void createDifferenceJSONFile() throws IOException
+	public static void createDifferenceJSONFile() throws IOException, JSONException
 	{
 		//change the filePath to change where the file is stored
 		String filePath = "Quotaero Data/current-wind_difference-surface-level-gfs-1.0.json";
@@ -251,8 +254,9 @@ public class Sandbox {
 	}
 
 
-	public static void createJSONObj() throws FileNotFoundException
+	public static void createJSONObj() throws FileNotFoundException, JSONException
 	{
+		//files be the u data and the v data for both files
 
 		//First file
 		//creates first json object from u-grd model file1
